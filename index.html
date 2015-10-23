@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Leaflet CSS</title>
+ <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+  
+<!-- Our own style sheet -->
+   <link rel="stylesheet" href="stylesheet.css" />
+
+</head>
+
+<body>
+
+
+
+
+<style>
+#map {
+  min-width:600px; min-height:400px;
+  x-width:1000px; x-height:800px;
+  position:fixed;
+  top:0; bottom:7em;
+  left:0; right:0;
+  border-bottom:1px solid #bbb;
+}
+</style>
+ <div id="map"></div>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.s/mq-map.js?key=nML93mbL9pfueAc9qYQ0lAHQhWMkA0s8"></script>
+        <script src="https://www.mapquestapi.com/sdk/leaflet/v2.s/mq-geocoding.js?key=nML93mbL9pfueAc9qYQ0lAHQhWMkA0s8"></script>
+<script>
+var popup = L.popup(),
+    geocode,
+    map;
+var marker = L.marker();
+map = L.map('map', {
+            layers: MQ.mapLayer(),
+            center: [ 44.052069, -123.086754 ],
+            zoom: 14 })
+       .on('click', function(e) {
+           marker.setLatLng(e.latlng)
+                .addTo(this);
+                geocode.reverse(e.latlng);
+    		
+       });
+
+geocode = MQ.geocode().on('success', function(e) {
+    marker.bindPopup(geocode.describeLocation(e.result.best)).openPopup();
+});
+
+</script>
+ 
+</body> </html>
